@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Documentos">
+  <meta name="theme-color" id="metaThemeColor" content="#F5F3EE">
+  <title>Mis documentos</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #F5F3EE;
+      --card: #FFFFFF;
+      --ink: #23271F;
+      --ink-soft: #6B6E62;
+      --line: #E4E1D6;
+      --accent: #2F5D50;
+      --accent-soft: #E4EEE9;
+      --ok-bg: #E4EEE9;
+      --ok-ink: #2F5D50;
+      --info-bg: #DCEAF0;
+      --info-ink: #29647A;
+      --warn-bg: #F8ECD4;
+      --warn-ink: #8A5A0A;
+      --urgent-bg: #FBE3D2;
+      --urgent-ink: #A05114;
+      --bad-bg: #F6E1DD;
+      --bad-ink: #A23B2C;
+      --none-bg: #EEEDE7;
+      --none-ink: #6B6E62;
+      --input-bg: #FBFAF7;
+      --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      --modal-overlay: rgba(20, 22, 19, 0.4);
+      --modal-bg: #FFFFFF;
+      --theme-toggle-bg: #EAE7DC;
+      --theme-toggle-ink: #2F5D50;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #131512;
+      --card: #1C1F1A;
+      --ink: #EDECE6;
+      --ink-soft: #9BA094;
+      --line: #292E26;
+      --accent: #52A089;
+      --accent-soft: #1C352B;
+      --ok-bg: #173225;
+      --ok-ink: #67D4A8;
+      --info-bg: #15303D;
+      --info-ink: #64C4E6;
+      --warn-bg: #382C13;
+      --warn-ink: #F2BD52;
+      --urgent-bg: #3E2412;
+      --urgent-ink: #F79454;
+      --bad-bg: #3E1A17;
+      --bad-ink: #F57667;
+      --none-bg: #242721;
+      --none-ink: #8E9486;
+      --input-bg: #161914;
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --modal-overlay: rgba(0, 0, 0, 0.75);
+      --modal-bg: #1E221C;
+      --theme-toggle-bg: #262B23;
+      --theme-toggle-ink: #EDECE6;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      padding-top: calc(24px + env(safe-area-inset-top));
+      padding-right: calc(18px + env(safe-area-inset-right));
+      padding-bottom: calc(50px + env(safe-area-inset-bottom));
+      padding-left: calc(18px + env(safe-area-inset-left));
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .wrap {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 700;
+      margin: 0 0 5px;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .sub {
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Botón Modo Claro / Oscuro */
+    .theme-toggle-btn {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--theme-toggle-bg);
+      color: var(--theme-toggle-ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.15s ease, background 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .theme-toggle-btn:active {
+      transform: scale(0.92);
+    }
+
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .banner {
+      background: var(--urgent-bg);
+      color: var(--urgent-ink);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--card-shadow);
+      transition: background 0.25s ease, border-color 0.25s ease;
+      overflow: hidden; /* Asegura que ningún elemento sobresalga */
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .doc-name {
+      font-size: 16.5px;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .pill.ok {
+      background: var(--ok-bg);
+      color: var(--ok-ink);
+    }
+
+    .pill.info {
+      background: var(--info-bg);
+      color: var(--info-ink);
+    }
+
+    .pill.warn {
+      background: var(--warn-bg);
+      color: var(--warn-ink);
+    }
+
+    .pill.urgent {
+      background: var(--urgent-bg);
+      color: var(--urgent-ink);
+    }
+
+    .pill.bad {
+      background: var(--bad-bg);
+      color: var(--bad-ink);
+    }
+
+    .pill.none {
+      background: var(--none-bg);
+      color: var(--none-ink);
+    }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date-info {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .date-display {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .days {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+
+    .days strong {
+      color: var(--ink);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .renew-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: transparent;
+      border: 1px solid var(--accent);
+      padding: 6px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, opacity 0.15s ease;
+    }
+
+    .renew-btn:active {
+      background: var(--accent-soft);
+      opacity: 0.85;
+    }
+
+    .clear-btn {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      background: transparent;
+      border: 1px solid var(--line);
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .clear-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .clear-btn:active {
+      background: var(--bad-bg);
+      color: var(--bad-ink);
+      border-color: var(--bad-ink);
+    }
+
+    label {
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* Chips de sugerencia rápida (+1 año, +5 años, etc.) */
+    .preset-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-chip-label {
+      font-size: 11px;
+      color: var(--ink-soft);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      margin-right: 2px;
+    }
+
+    .chip-btn {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid transparent;
+      padding: 3px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+
+    .chip-btn:active {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+
+    /* Grupo de input con botón Guardar */
+    .date-input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .date-input-group input[type="date"] {
+      flex: 1;
+      min-width: 0; /* Clave en flexbox para que no desborde en iOS WebKit */
+    }
+
+    .save-new-btn {
+      flex-shrink: 0;
+      height: 44px;
+      padding: 0 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    /* Estilos del control de fecha */
+    input[type="date"] {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -webkit-appearance: none;
+      appearance: none;
+      font-size: 15px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--input-bg);
+      color: var(--ink);
+      font-family: inherit;
+      outline: none;
+      min-height: 44px;
+      margin: 0;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="date"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    input[type="date"]::-webkit-date-and-time-value {
+      text-align: left;
+      line-height: normal;
+      min-height: 1.2em;
+      margin: 0;
+      padding: 0;
+    }
+
+    .renew-form {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .renew-form.open {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .renew-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      background: var(--input-bg);
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:active {
+      opacity: 0.85;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn.danger-outline {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--bad-ink);
+      margin-left: auto;
+    }
+
+    .btn.danger-outline:active {
+      background: var(--bad-bg);
+    }
+
+    .error {
+      font-size: 12px;
+      color: var(--bad-ink);
+      margin-top: 6px;
+      display: none;
+    }
+
+    /* Modal de confirmación */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--modal-overlay);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: var(--modal-bg);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 20px 18px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transform: scale(0.94);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: var(--ink);
+    }
+
+    .modal-desc {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+      margin: 0 0 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 13.5px;
+    }
+
+    .btn.modal-confirm-danger {
+      background: var(--bad-ink);
+      border-color: var(--bad-ink);
+      color: #FFFFFF;
+    }
+
+    /* Mensaje flotante de guardado */
+    .save-msg {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      min-height: 20px;
+      margin-top: 10px;
+      transition: opacity 0.2s ease;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 12px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-row">
+        <div>
+          <h1>Mis documentos</h1>
+          <p class="sub">Cédula, licencia, visa y pasaporte, con la fecha de vencimiento de cada uno.</p>
+        </div>
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Cambiar modo de color" title="Alternar Modo Oscuro / Claro">
+          <!-- Icono SVG cargado dinámicamente -->
+        </button>
+      </div>
+    </header>
+
+    <div class="banner" id="banner"></div>
+    <div id="cards"></div>
+    <div class="save-msg" id="saveMsg"></div>
+    <footer>Los datos se guardan en este dispositivo.</footer>
+  </div>
+
+  <!-- Modal de confirmación para limpiar -->
+  <div class="modal-backdrop" id="clearModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <h2 class="modal-title" id="modalTitle">¿Limpiar fecha?</h2>
+      <p class="modal-desc" id="modalDesc">¿Deseas eliminar la fecha de este documento? Podrás volver a ingresarla en cualquier momento.</p>
+      <div class="modal-actions">
+        <button class="btn" type="button" id="modalCancelBtn">Cancelar</button>
+        <button class="btn modal-confirm-danger" type="button" id="modalConfirmBtn">Limpiar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DOCS = [
+      { id: "cedula", name: "Cédula" },
+      { id: "licencia", name: "Licencia de conducir" },
+      { id: "visa", name: "Visa" },
+      { id: "pasaporte", name: "Pasaporte" }
+    ];
+
+    const cardsEl = document.getElementById("cards");
+    const saveMsgEl = document.getElementById("saveMsg");
+    const bannerEl = document.getElementById("banner");
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const metaThemeColor = document.getElementById("metaThemeColor");
+
+    // Modal elements
+    const clearModal = document.getElementById("clearModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const modalCancelBtn = document.getElementById("modalCancelBtn");
+    const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+
+    let currentPendingDoc = null;
+    let currentData = {};
+    let saveTimer = null;
+
+    // --- Gestión de Tema (Modo Claro y Oscuro) ---
+    const SUN_SVG = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+    const MOON_SVG = `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+    function getPreferredTheme() {
+      const stored = localStorage.getItem("documentos_theme");
+      if (stored === "dark" || stored === "light") return stored;
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      if (theme === "dark") {
+        themeToggleBtn.innerHTML = SUN_SVG;
+        themeToggleBtn.setAttribute("aria-label", "Cambiar a modo claro");
+        themeToggleBtn.setAttribute("title", "Cambiar a modo claro");
+        metaThemeColor.setAttribute("content", "#131512");
+      } else {
+        themeToggleBtn.innerHTML = MOON_SVG;
+        themeToggleBtn.setAttribute("aria-label", "Cambiar a modo oscuro");
+        themeToggleBtn.setAttribute("title", "Cambiar a modo oscuro");
+        metaThemeColor.setAttribute("content", "#F5F3EE");
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "light";
+      const nextTheme = current === "dark" ? "light" : "dark";
+      localStorage.setItem("documentos_theme", nextTheme);
+      applyTheme(nextTheme);
+    }
+
+    themeToggleBtn.addEventListener("click", toggleTheme);
+
+    if (window.matchMedia) {
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+        if (!localStorage.getItem("documentos_theme")) {
+          applyTheme(e.matches ? "dark" : "light");
+        }
+      });
+    }
+
+    // --- Utilidades de fechas ---
+    function daysUntil(dateStr) {
+      if (!dateStr) return null;
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const target = new Date(dateStr + "T00:00:00");
+      return Math.round((target - today) / 86400000);
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + "T00:00:00");
+      return d.toLocaleDateString("es", { day: "numeric", month: "short", year: "numeric" });
+    }
+
+    function statusFor(days) {
+      if (days === null) return { cls: "none", label: "Sin fecha" };
+      if (days < 0) return { cls: "bad", label: "Vencido" };
+      if (days <= 60) return { cls: "urgent", label: "Vence pronto" };
+      if (days <= 365) return { cls: "warn", label: "Por vencer" };
+      if (days <= 730) return { cls: "info", label: "Vigente" };
+      return { cls: "ok", label: "Vigente" };
+    }
+
+    function daysText(days) {
+      if (days === null) return "Agrega la fecha de vencimiento.";
+      if (days < 0) return `Vencido hace ${Math.abs(days)} día${Math.abs(days) === 1 ? "" : "s"}.`;
+      if (days === 0) return "Vence hoy.";
+      return `Faltan <strong>${days}</strong> día${days === 1 ? "" : "s"}.`;
+    }
+
+    function getFutureDateString(years) {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() + years);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    // --- Modal de Confirmación de Limpieza ---
+    function promptClearDoc(doc) {
+      currentPendingDoc = doc;
+      modalTitle.textContent = `¿Limpiar ${doc.name}?`;
+      modalDesc.innerHTML = `Se borrará la fecha configurada para <strong>${doc.name}</strong>. Podrás volver a ingresarla cuando quieras.`;
+      clearModal.classList.add("active");
+    }
+
+    function closeModal() {
+      clearModal.classList.remove("active");
+      currentPendingDoc = null;
+    }
+
+    modalCancelBtn.addEventListener("click", closeModal);
+    clearModal.addEventListener("click", (e) => {
+      if (e.target === clearModal) closeModal();
+    });
+
+    modalConfirmBtn.addEventListener("click", async () => {
+      if (!currentPendingDoc) return;
+      const docId = currentPendingDoc.id;
+      const docName = currentPendingDoc.name;
+      delete currentData[docId];
+      await save(currentData, `Fecha de ${docName} limpiada`);
+      closeModal();
+      render(currentData);
+    });
+
+    // --- Renderizado de tarjetas ---
+    function render(data) {
+      currentData = data;
+      cardsEl.innerHTML = "";
+
+      DOCS.forEach(doc => {
+        const value = data[doc.id] || "";
+        const days = daysUntil(value);
+        const status = statusFor(days);
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        if (value) {
+          card.innerHTML = `
+            <div class="card-top">
+              <p class="doc-name">${doc.name}</p>
+              <span class="pill ${status.cls}">${status.label}</span>
+            </div>
+            <div class="date-row">
+              <div class="date-info">
+                <div class="date-display">Vence: ${formatDate(value)}</div>
+                <div class="days">${daysText(days)}</div>
+              </div>
+              <div class="card-actions">
+                <button class="clear-btn" type="button" data-clear="${doc.id}" title="Limpiar fecha">
+                  <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
+                  Limpiar
+                </button>
+                <button class="renew-btn" type="button" data-id="${doc.id}">Renové</button>
+              </div>
+            </div>
+            <div class="renew-form" id="form-${doc.id}">
+              <label for="input-${doc.id}">Nueva fecha de vencimiento</label>
+              <div class="preset-chips">
+                <span class="preset-chip-label">Sugerir:</span>
+                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="1">+1 año</button>
+                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="3">+3 años</button>
+                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="5">+5 años</button>
+                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="10">+10 años</button>
+              </div>
+              <input type="date" id="input-${doc.id}" value="${value}">
+              <p class="error" id="error-${doc.id}">Elegí una fecha antes de guardar.</p>
+              <div class="renew-actions">
+                <button class="btn primary" type="button" data-save="${doc.id}">Guardar</button>
+                <button class="btn" type="button" data-cancel="${doc.id}">Cancelar</button>
+                <button class="btn danger-outline" type="button" data-form-clear="${doc.id}">Limpiar fecha</button>
+              </div>
+            </div>
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="card-top">
+              <p class="doc-name">${doc.name}</p>
+              <span class="pill ${status.cls}">${status.label}</span>
+            </div>
+            <label for="input-${doc.id}">Fecha de vencimiento</label>
+            <div class="preset-chips">
+              <span class="preset-chip-label">Sugerir:</span>
+              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="1">+1 año</button>
+              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="3">+3 años</button>
+              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="5">+5 años</button>
+              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="10">+10 años</button>
+            </div>
+            <div class="date-input-group">
+              <input type="date" id="input-${doc.id}">
+              <button class="btn primary save-new-btn" type="button" data-save-new="${doc.id}">Guardar</button>
+            </div>
+            <p class="error" id="error-${doc.id}">Elegí una fecha antes de guardar.</p>
+          `;
+        }
+
+        cardsEl.appendChild(card);
+
+        if (value) {
+          const renewBtn = card.querySelector(".renew-btn");
+          const form = card.querySelector(`#form-${doc.id}`);
+          const clearBtn = card.querySelector(`[data-clear="${doc.id}"]`);
+          const formClearBtn = card.querySelector(`[data-form-clear="${doc.id}"]`);
+          const renewInput = card.querySelector(`#input-${doc.id}`);
+          const renewError = card.querySelector(`#error-${doc.id}`);
+
+          renewBtn.addEventListener("click", () => {
+            form.classList.toggle("open");
+          });
+
+          clearBtn.addEventListener("click", () => {
+            promptClearDoc(doc);
+          });
+
+          formClearBtn.addEventListener("click", () => {
+            form.classList.remove("open");
+            promptClearDoc(doc);
+          });
+
+          card.querySelectorAll(`[data-preset-renew="${doc.id}"]`).forEach(btn => {
+            btn.addEventListener("click", () => {
+              const years = parseInt(btn.getAttribute("data-years"), 10);
+              renewInput.value = getFutureDateString(years);
+              renewError.style.display = "none";
+            });
+          });
+
+          card.querySelector(`[data-save="${doc.id}"]`).addEventListener("click", async () => {
+            if (!renewInput.value) {
+              renewError.style.display = "block";
+              return;
+            }
+            data[doc.id] = renewInput.value;
+            await save(data, "Fecha actualizada");
+            render(data);
+          });
+
+          card.querySelector(`[data-cancel="${doc.id}"]`).addEventListener("click", () => {
+            form.classList.remove("open");
+          });
+        } else {
+          const input = card.querySelector(`#input-${doc.id}`);
+          const errorEl = card.querySelector(`#error-${doc.id}`);
+          const saveBtn = card.querySelector(`[data-save-new="${doc.id}"]`);
+
+          // Presets rápidos para elegir año futuro sin tener que rodar la rueda
+          card.querySelectorAll(`[data-preset="${doc.id}"]`).forEach(btn => {
+            btn.addEventListener("click", () => {
+              const years = parseInt(btn.getAttribute("data-years"), 10);
+              input.value = getFutureDateString(years);
+              errorEl.style.display = "none";
+            });
+          });
+
+          // Solo se guarda al hacer clic explícito en "Guardar", NO al tocar o cambiar el input
+          saveBtn.addEventListener("click", async () => {
+            if (!input.value) {
+              errorEl.style.display = "block";
+              return;
+            }
+            data[doc.id] = input.value;
+            await save(data, "Fecha guardada");
+            render(data);
+          });
+
+          // Limpiar el mensaje de error si el usuario elige una fecha
+          input.addEventListener("input", () => {
+            if (input.value) {
+              errorEl.style.display = "none";
+            }
+          });
+        }
+      });
+    }
+
+    // --- Almacenamiento ---
+    async function load() {
+      try {
+        const result = localStorage.getItem("documentos");
+        return result ? JSON.parse(result) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    async function save(data, customMsg = "Guardado") {
+      try {
+        localStorage.setItem("documentos", JSON.stringify(data));
+        saveMsgEl.textContent = customMsg;
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          saveMsgEl.textContent = "";
+        }, 1800);
+      } catch (e) {
+        saveMsgEl.textContent = "No se pudo guardar";
+      }
+    }
+
+    // --- Inicialización ---
+    (async function init() {
+      applyTheme(getPreferredTheme());
+      const data = await load();
+      render(data);
+    })();
+  </script>
+</body>
+
+</html>
