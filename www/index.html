@@ -7,65 +7,113 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Documentos">
-  <meta name="theme-color" id="metaThemeColor" content="#F5F3EE">
+  <meta name="theme-color" id="metaThemeColor" content="#F2F2F7">
   <title>Mis documentos</title>
   <style>
     :root {
       color-scheme: light;
-      --bg: #F5F3EE;
+      --bg: #F2F2F7;
       --card: #FFFFFF;
-      --ink: #23271F;
-      --ink-soft: #6B6E62;
-      --line: #E4E1D6;
-      --accent: #2F5D50;
-      --accent-soft: #E4EEE9;
-      --ok-bg: #E4EEE9;
-      --ok-ink: #2F5D50;
-      --info-bg: #DCEAF0;
-      --info-ink: #29647A;
-      --warn-bg: #F8ECD4;
-      --warn-ink: #8A5A0A;
-      --urgent-bg: #FBE3D2;
-      --urgent-ink: #A05114;
-      --bad-bg: #F6E1DD;
-      --bad-ink: #A23B2C;
-      --none-bg: #EEEDE7;
-      --none-ink: #6B6E62;
-      --input-bg: #FBFAF7;
-      --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-      --modal-overlay: rgba(20, 22, 19, 0.4);
-      --modal-bg: #FFFFFF;
-      --theme-toggle-bg: #EAE7DC;
-      --theme-toggle-ink: #2F5D50;
+      --card-border: rgba(0, 0, 0, 0.06);
+      --card-inner: #F8F8FA;
+      --ink: #1C1C1E;
+      --ink-soft: #8E8E93;
+      --line: #E5E5EA;
+      --accent: #2563EB;
+      --accent-soft: #EFF6FF;
+      --accent-ink: #1D4ED8;
+      
+      /* Pills de estado */
+      --ok-bg: #E8F5E9;
+      --ok-ink: #2E7D32;
+      --info-bg: #E0F2FE;
+      --info-ink: #0369A1;
+      --warn-bg: #FEF3C7;
+      --warn-ink: #B45309;
+      --urgent-bg: #FFEDD5;
+      --urgent-ink: #C2410C;
+      --bad-bg: #FEE2E2;
+      --bad-ink: #B91C1C;
+      --none-bg: #F3F4F6;
+      --none-ink: #6B7280;
+
+      /* Badges temáticos por categoría */
+      --badge-cedula-bg: #EFF6FF;
+      --badge-cedula-ink: #2563EB;
+      --badge-licencia-bg: #ECFDF5;
+      --badge-licencia-ink: #059669;
+      --badge-visa-bg: #FFFBEB;
+      --badge-visa-ink: #D97706;
+      --badge-pasaporte-bg: #F5F3FF;
+      --badge-pasaporte-ink: #7C3AED;
+      --badge-garantia-bg: #FEF3C7;
+      --badge-garantia-ink: #B45309;
+      --badge-tarjeta-bg: #E0F2FE;
+      --badge-tarjeta-ink: #0284C7;
+      --badge-hogar-bg: #FFE4E6;
+      --badge-hogar-ink: #E11D48;
+      --badge-documento-bg: #F1F5F9;
+      --badge-documento-ink: #475569;
+
+      --input-bg: #F2F2F7;
+      --sheet-bg: #FFFFFF;
+      --sheet-overlay: rgba(0, 0, 0, 0.45);
+      --btn-circle-bg: #E5E5EA;
+      --btn-circle-ink: #1C1C1E;
+      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
     }
 
     [data-theme="dark"] {
       color-scheme: dark;
-      --bg: #131512;
-      --card: #1C1F1A;
-      --ink: #EDECE6;
-      --ink-soft: #9BA094;
-      --line: #292E26;
-      --accent: #52A089;
-      --accent-soft: #1C352B;
-      --ok-bg: #173225;
-      --ok-ink: #67D4A8;
-      --info-bg: #15303D;
-      --info-ink: #64C4E6;
-      --warn-bg: #382C13;
-      --warn-ink: #F2BD52;
-      --urgent-bg: #3E2412;
-      --urgent-ink: #F79454;
-      --bad-bg: #3E1A17;
-      --bad-ink: #F57667;
-      --none-bg: #242721;
-      --none-ink: #8E9486;
-      --input-bg: #161914;
-      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-      --modal-overlay: rgba(0, 0, 0, 0.75);
-      --modal-bg: #1E221C;
-      --theme-toggle-bg: #262B23;
-      --theme-toggle-ink: #EDECE6;
+      --bg: #000000;
+      --card: #1C1C1E;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-inner: #2C2C2E;
+      --ink: #FFFFFF;
+      --ink-soft: #8E8E93;
+      --line: #2C2C2E;
+      --accent: #3B82F6;
+      --accent-soft: #1E293B;
+      --accent-ink: #60A5FA;
+      
+      /* Pills de estado en modo oscuro */
+      --ok-bg: #064E3B;
+      --ok-ink: #6EE7B7;
+      --info-bg: #0C4A6E;
+      --info-ink: #7DD3FC;
+      --warn-bg: #451A03;
+      --warn-ink: #FCD34D;
+      --urgent-bg: #431407;
+      --urgent-ink: #FB923C;
+      --bad-bg: #450A0A;
+      --bad-ink: #FCA5A5;
+      --none-bg: #27272A;
+      --none-ink: #9CA3AF;
+
+      /* Badges en modo oscuro */
+      --badge-cedula-bg: #1E293B;
+      --badge-cedula-ink: #93C5FD;
+      --badge-licencia-bg: #064E3B;
+      --badge-licencia-ink: #6EE7B7;
+      --badge-visa-bg: #451A03;
+      --badge-visa-ink: #FCD34D;
+      --badge-pasaporte-bg: #3B0764;
+      --badge-pasaporte-ink: #C4B5FD;
+      --badge-garantia-bg: #451A03;
+      --badge-garantia-ink: #FCD34D;
+      --badge-tarjeta-bg: #0C4A6E;
+      --badge-tarjeta-ink: #7DD3FC;
+      --badge-hogar-bg: #4C0519;
+      --badge-hogar-ink: #FDA4AF;
+      --badge-documento-bg: #1E293B;
+      --badge-documento-ink: #94A3B8;
+
+      --input-bg: #2C2C2E;
+      --sheet-bg: #1C1C1E;
+      --sheet-overlay: rgba(0, 0, 0, 0.75);
+      --btn-circle-bg: #2C2C2E;
+      --btn-circle-ink: #FFFFFF;
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     * {
@@ -77,13 +125,13 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", -system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      padding-top: calc(24px + env(safe-area-inset-top));
-      padding-right: calc(18px + env(safe-area-inset-right));
-      padding-bottom: calc(50px + env(safe-area-inset-bottom));
-      padding-left: calc(18px + env(safe-area-inset-left));
+      padding-top: calc(20px + env(safe-area-inset-top));
+      padding-right: calc(16px + env(safe-area-inset-right));
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+      padding-left: calc(16px + env(safe-area-inset-left));
       transition: background 0.25s ease, color 0.25s ease;
     }
 
@@ -92,56 +140,139 @@
       margin: 0 auto;
     }
 
+    /* Encabezado estilo iOS */
     header {
       margin-bottom: 20px;
+      padding: 0 4px;
     }
 
-    .header-row {
+    .header-top {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .app-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    .header-title-row {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
     }
 
     h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 27px;
+      font-size: 32px;
       font-weight: 700;
-      margin: 0 0 5px;
-      letter-spacing: -0.015em;
+      letter-spacing: -0.025em;
+      margin: 0;
       color: var(--ink);
     }
 
-    .sub {
-      color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.4;
-      margin: 0;
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* Botón Modo Claro / Oscuro */
-    .theme-toggle-btn {
-      flex-shrink: 0;
-      width: 42px;
-      height: 42px;
+    /* Botones circulares estilo iOS */
+    .icon-btn {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid var(--line);
-      background: var(--theme-toggle-bg);
-      color: var(--theme-toggle-ink);
+      border: none;
+      background: var(--btn-circle-bg);
+      color: var(--btn-circle-ink);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       padding: 0;
-      transition: transform 0.15s ease, background 0.25s ease, border-color 0.25s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease, background 0.2s ease;
     }
 
-    .theme-toggle-btn:active {
+    .icon-btn:active {
       transform: scale(0.92);
     }
 
-    .theme-toggle-btn svg {
+    .icon-btn.primary {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .icon-btn svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Resumen superior */
+    .summary-pills {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .summary-tag {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    /* Contenedor lista agrupada estilo iOS */
+    .ios-group {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      margin-bottom: 14px;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* Fila de documento */
+    .doc-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 0.5px solid var(--line);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+
+    .doc-row:last-child {
+      border-bottom: none;
+    }
+
+    .doc-row:active {
+      background: var(--card-inner);
+    }
+
+    /* Icono distintivo */
+    .doc-icon-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      flex-shrink: 0;
+    }
+
+    .doc-icon-badge svg {
       width: 20px;
       height: 20px;
       fill: none;
@@ -151,241 +282,280 @@
       stroke-linejoin: round;
     }
 
-    .banner {
-      background: var(--urgent-bg);
-      color: var(--urgent-ink);
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 13.5px;
+    .doc-icon-badge.cedula { background: var(--badge-cedula-bg); color: var(--badge-cedula-ink); }
+    .doc-icon-badge.licencia { background: var(--badge-licencia-bg); color: var(--badge-licencia-ink); }
+    .doc-icon-badge.visa { background: var(--badge-visa-bg); color: var(--badge-visa-ink); }
+    .doc-icon-badge.pasaporte { background: var(--badge-pasaporte-bg); color: var(--badge-pasaporte-ink); }
+    .doc-icon-badge.garantia { background: var(--badge-garantia-bg); color: var(--badge-garantia-ink); }
+    .doc-icon-badge.tarjeta { background: var(--badge-tarjeta-bg); color: var(--badge-tarjeta-ink); }
+    .doc-icon-badge.hogar { background: var(--badge-hogar-bg); color: var(--badge-hogar-ink); }
+    .doc-icon-badge.documento { background: var(--badge-documento-bg); color: var(--badge-documento-ink); }
+
+    /* Texto */
+    .doc-info {
+      flex: 1;
+      min-width: 0;
+      padding-right: 8px;
+    }
+
+    .doc-title {
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 14px;
-      display: none;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-      box-shadow: var(--card-shadow);
-      transition: background 0.25s ease, border-color 0.25s ease;
-      overflow: hidden; /* Asegura que ningún elemento sobresalga */
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .doc-name {
-      font-size: 16.5px;
-      font-weight: 600;
-      margin: 0;
+      margin: 0 0 3px;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       letter-spacing: -0.01em;
+    }
+
+    .doc-subtitle {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-subtitle.has-date strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Estado a la derecha */
+    .doc-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .pill {
       font-size: 12px;
       font-weight: 600;
+      padding: 3.5px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .pill.ok { background: var(--ok-bg); color: var(--ok-ink); }
+    .pill.info { background: var(--info-bg); color: var(--info-ink); }
+    .pill.warn { background: var(--warn-bg); color: var(--warn-ink); }
+    .pill.urgent { background: var(--urgent-bg); color: var(--urgent-ink); }
+    .pill.bad { background: var(--bad-bg); color: var(--bad-ink); }
+    .pill.none { background: var(--none-bg); color: var(--none-ink); }
+
+    .add-badge {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent-ink);
+      background: var(--accent-soft);
       padding: 4px 10px;
       border-radius: 999px;
-      white-space: nowrap;
-      letter-spacing: 0.01em;
-    }
-
-    .pill.ok {
-      background: var(--ok-bg);
-      color: var(--ok-ink);
-    }
-
-    .pill.info {
-      background: var(--info-bg);
-      color: var(--info-ink);
-    }
-
-    .pill.warn {
-      background: var(--warn-bg);
-      color: var(--warn-ink);
-    }
-
-    .pill.urgent {
-      background: var(--urgent-bg);
-      color: var(--urgent-ink);
-    }
-
-    .pill.bad {
-      background: var(--bad-bg);
-      color: var(--bad-ink);
-    }
-
-    .pill.none {
-      background: var(--none-bg);
-      color: var(--none-ink);
-    }
-
-    .date-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .date-info {
-      flex: 1;
-      min-width: 140px;
-    }
-
-    .date-display {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .days {
-      font-size: 13px;
-      color: var(--ink-soft);
-      margin-top: 2px;
-    }
-
-    .days strong {
-      color: var(--ink);
-    }
-
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .renew-btn {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      background: transparent;
-      border: 1px solid var(--accent);
-      padding: 6px 13px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s ease, opacity 0.15s ease;
-    }
-
-    .renew-btn:active {
-      background: var(--accent-soft);
-      opacity: 0.85;
-    }
-
-    .clear-btn {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink-soft);
-      background: transparent;
-      border: 1px solid var(--line);
-      padding: 6px 11px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      gap: 3px;
     }
 
-    .clear-btn svg {
-      width: 13px;
-      height: 13px;
+    .chevron {
+      color: var(--ink-soft);
+      opacity: 0.6;
+      display: flex;
+      align-items: center;
+    }
+
+    .chevron svg {
+      width: 15px;
+      height: 15px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 2;
+      stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
-    .clear-btn:active {
-      background: var(--bad-bg);
-      color: var(--bad-ink);
-      border-color: var(--bad-ink);
-    }
-
-    label {
-      font-size: 11.5px;
-      color: var(--ink-soft);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    /* Chips de sugerencia rápida (+1 año, +5 años, etc.) */
-    .preset-chips {
+    /* Botón al pie de lista para agregar */
+    .add-new-doc-row {
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-    }
-
-    .preset-chip-label {
-      font-size: 11px;
-      color: var(--ink-soft);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-      margin-right: 2px;
-    }
-
-    .chip-btn {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid transparent;
-      padding: 3px 8px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.1s ease, opacity 0.15s ease;
-    }
-
-    .chip-btn:active {
-      transform: scale(0.95);
-      opacity: 0.8;
-    }
-
-    /* Grupo de input con botón Guardar */
-    .date-input-group {
-      display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 8px;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .date-input-group input[type="date"] {
-      flex: 1;
-      min-width: 0; /* Clave en flexbox para que no desborde en iOS WebKit */
-    }
-
-    .save-new-btn {
-      flex-shrink: 0;
-      height: 44px;
-      padding: 0 16px;
-      font-size: 13.5px;
+      padding: 14px 16px;
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px dashed var(--line);
+      color: var(--accent);
+      font-size: 14.5px;
       font-weight: 600;
-      border-radius: 10px;
-      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, opacity 0.15s ease;
+      margin-bottom: 20px;
     }
 
-    /* Estilos del control de fecha */
+    .add-new-doc-row:active {
+      background: var(--card-inner);
+      opacity: 0.85;
+    }
+
+    .add-new-doc-row svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Mensaje flotante de guardado */
+    .toast-msg {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      min-height: 20px;
+      margin-top: 4px;
+      transition: opacity 0.2s ease;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    /* --- Action Sheet Modal estilo iOS --- */
+    .sheet-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--sheet-overlay);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .sheet-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sheet-panel {
+      background: var(--sheet-bg);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      width: 100%;
+      max-width: 480px;
+      padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .sheet-backdrop.active .sheet-panel {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 38px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--line);
+      margin: 0 auto 16px;
+    }
+
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .sheet-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sheet-doc-title {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .sheet-close-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--card-inner);
+      border: none;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .sheet-close-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sheet-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Inputs de texto y fecha */
+    .sheet-text-input {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      font-size: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--input-bg);
+      color: var(--ink);
+      font-family: inherit;
+      outline: none;
+      min-height: 48px;
+      margin: 0 0 16px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .sheet-text-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
     input[type="date"] {
       display: block;
       width: 100%;
@@ -394,16 +564,16 @@
       -webkit-box-sizing: border-box;
       -webkit-appearance: none;
       appearance: none;
-      font-size: 15px;
-      padding: 10px 12px;
+      font-size: 16px;
+      padding: 12px 14px;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 12px;
       background: var(--input-bg);
       color: var(--ink);
       font-family: inherit;
       outline: none;
-      min-height: 44px;
-      margin: 0;
+      min-height: 48px;
+      margin: 0 0 16px;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -416,170 +586,235 @@
       text-align: left;
       line-height: normal;
       min-height: 1.2em;
-      margin: 0;
-      padding: 0;
     }
 
-    .renew-form {
-      margin-top: 14px;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-      display: none;
-      animation: fadeIn 0.2s ease;
-    }
-
-    .renew-form.open {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .renew-actions {
+    /* Píldoras de sugerencia rápida */
+    .sheet-chips {
       display: flex;
-      gap: 8px;
-      margin-top: 12px;
+      gap: 6px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
-    .btn {
-      font-size: 13px;
-      font-weight: 600;
-      padding: 8px 14px;
-      border-radius: 9px;
-      border: 1px solid var(--line);
-      background: var(--input-bg);
-      color: var(--ink);
-      cursor: pointer;
-      transition: background 0.15s ease, opacity 0.15s ease;
-    }
-
-    .btn:active {
-      opacity: 0.85;
-    }
-
-    .btn.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #FFFFFF;
-    }
-
-    .btn.danger-outline {
-      background: transparent;
-      border-color: var(--line);
-      color: var(--bad-ink);
-      margin-left: auto;
-    }
-
-    .btn.danger-outline:active {
-      background: var(--bad-bg);
-    }
-
-    .error {
+    .chip-btn {
       font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-ink);
+      background: var(--accent-soft);
+      border: none;
+      padding: 5px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+
+    .chip-btn:active {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+
+    /* Selector de categorías para nuevo documento */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .category-opt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 6px;
+      border-radius: 12px;
+      background: var(--card-inner);
+      border: 2px solid transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .category-opt.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .category-opt .cat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-opt .cat-icon svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .category-opt .cat-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .sheet-error {
+      font-size: 12.5px;
       color: var(--bad-ink);
-      margin-top: 6px;
+      margin: -10px 0 12px;
       display: none;
     }
 
-    /* Modal de confirmación */
-    .modal-backdrop {
+    .sheet-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-save {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-save:active {
+      opacity: 0.88;
+    }
+
+    .btn-clear-date {
+      background: transparent;
+      color: var(--warn-ink);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-clear-date:active {
+      background: var(--warn-bg);
+    }
+
+    .btn-delete-doc {
+      background: transparent;
+      color: var(--bad-ink);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-delete-doc:active {
+      background: var(--bad-bg);
+    }
+
+    .btn-delete-doc svg,
+    .btn-clear-date svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Modal de confirmación para eliminar */
+    .confirm-modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--modal-overlay);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      z-index: 999;
+      z-index: 1200;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 20px;
     }
 
-    .modal-backdrop.active {
+    .confirm-modal-backdrop.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .modal-box {
-      background: var(--modal-bg);
-      border: 1px solid var(--line);
+    .confirm-modal-box {
+      background: var(--sheet-bg);
       border-radius: 18px;
       padding: 22px 20px 18px;
       width: 100%;
       max-width: 320px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
-      transform: scale(0.94);
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .modal-backdrop.active .modal-box {
-      transform: scale(1);
-    }
-
-    .modal-title {
-      font-family: Georgia, "Times New Roman", serif;
+    .confirm-modal-box h3 {
       font-size: 18px;
       font-weight: 700;
       margin: 0 0 8px;
       color: var(--ink);
     }
 
-    .modal-desc {
+    .confirm-modal-box p {
       font-size: 13.5px;
       color: var(--ink-soft);
-      line-height: 1.45;
+      line-height: 1.4;
       margin: 0 0 18px;
     }
 
-    .modal-actions {
+    .confirm-modal-actions {
       display: flex;
       gap: 10px;
     }
 
-    .modal-actions .btn {
+    .confirm-modal-actions button {
       flex: 1;
       padding: 10px 14px;
-      font-size: 13.5px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      cursor: pointer;
     }
 
-    .btn.modal-confirm-danger {
+    .btn-modal-cancel {
+      background: var(--input-bg);
+      color: var(--ink);
+    }
+
+    .btn-modal-danger {
       background: var(--bad-ink);
-      border-color: var(--bad-ink);
       color: #FFFFFF;
-    }
-
-    /* Mensaje flotante de guardado */
-    .save-msg {
-      text-align: center;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      min-height: 20px;
-      margin-top: 10px;
-      transition: opacity 0.2s ease;
-    }
-
-    footer {
-      text-align: center;
-      color: var(--ink-soft);
-      font-size: 12px;
-      margin-top: 24px;
+      border-color: var(--bad-ink) !important;
     }
   </style>
 </head>
@@ -587,61 +822,232 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="header-row">
-        <div>
-          <h1>Mis documentos</h1>
-          <p class="sub">Cédula, licencia, visa y pasaporte, con la fecha de vencimiento de cada uno.</p>
+      <div class="header-top">
+        <span class="app-eyebrow">Control de vigencias</span>
+      </div>
+      <div class="header-title-row">
+        <h1>Mis documentos</h1>
+        <div class="header-actions">
+          <button id="addDocHeaderBtn" class="icon-btn primary" type="button" aria-label="Agregar documento" title="Agregar documento o garantía">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <button id="themeToggle" class="icon-btn" type="button" aria-label="Cambiar modo de color" title="Alternar Modo Oscuro / Claro">
+            <!-- Icono SVG dinámico -->
+          </button>
         </div>
-        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Cambiar modo de color" title="Alternar Modo Oscuro / Claro">
-          <!-- Icono SVG cargado dinámicamente -->
-        </button>
+      </div>
+      <div class="summary-pills" id="summaryBar">
+        <span class="summary-tag" id="summaryText">Cargando estado...</span>
       </div>
     </header>
 
-    <div class="banner" id="banner"></div>
-    <div id="cards"></div>
-    <div class="save-msg" id="saveMsg"></div>
+    <!-- Lista agrupada estilo iOS -->
+    <div class="ios-group" id="docsList"></div>
+
+    <!-- Botón para agregar documento al pie de lista -->
+    <div class="add-new-doc-row" id="addDocListBtn" role="button" tabindex="0">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      <span>Agregar documento o garantía</span>
+    </div>
+
+    <div class="toast-msg" id="saveMsg"></div>
     <footer>Los datos se guardan en este dispositivo.</footer>
   </div>
 
-  <!-- Modal de confirmación para limpiar -->
-  <div class="modal-backdrop" id="clearModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box">
-      <h2 class="modal-title" id="modalTitle">¿Limpiar fecha?</h2>
-      <p class="modal-desc" id="modalDesc">¿Deseas eliminar la fecha de este documento? Podrás volver a ingresarla en cualquier momento.</p>
-      <div class="modal-actions">
-        <button class="btn" type="button" id="modalCancelBtn">Cancelar</button>
-        <button class="btn modal-confirm-danger" type="button" id="modalConfirmBtn">Limpiar</button>
+  <!-- Action Sheet: Ver / Editar / Limpiar / Eliminar documento existente -->
+  <div class="sheet-backdrop" id="editSheetBackdrop" role="dialog" aria-modal="true" aria-labelledby="editDocTitle">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-header-left">
+          <div class="doc-icon-badge" id="editIconBadge"></div>
+          <div>
+            <h2 class="sheet-doc-title" id="editDocTitle">Documento</h2>
+          </div>
+        </div>
+        <button class="sheet-close-btn" type="button" id="editCloseBtn" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <label class="sheet-label" for="editNameInput">Nombre</label>
+      <input type="text" class="sheet-text-input" id="editNameInput" placeholder="Nombre del documento">
+
+      <label class="sheet-label" for="editDateInput">Fecha de vencimiento</label>
+      <div class="sheet-chips" id="editChips">
+        <button type="button" class="chip-btn" data-edit-years="1">+1 año</button>
+        <button type="button" class="chip-btn" data-edit-years="2">+2 años</button>
+        <button type="button" class="chip-btn" data-edit-years="3">+3 años</button>
+        <button type="button" class="chip-btn" data-edit-years="5">+5 años</button>
+        <button type="button" class="chip-btn" data-edit-years="10">+10 años</button>
+      </div>
+
+      <input type="date" id="editDateInput">
+      <p class="sheet-error" id="editError">Elige una fecha válida antes de guardar.</p>
+
+      <div class="sheet-actions">
+        <button class="btn-save" type="button" id="editSaveBtn">Guardar cambios</button>
+        <button class="btn-clear-date" type="button" id="editClearBtn">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Limpiar fecha (dejar sin fecha)
+        </button>
+        <button class="btn-delete-doc" type="button" id="editDeleteBtn">
+          <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"/></svg>
+          Eliminar este documento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Sheet: Crear Nuevo Documento o Garantía -->
+  <div class="sheet-backdrop" id="newDocSheetBackdrop" role="dialog" aria-modal="true" aria-labelledby="newDocHeaderTitle">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-header-left">
+          <h2 class="sheet-doc-title" id="newDocHeaderTitle">Nuevo documento</h2>
+        </div>
+        <button class="sheet-close-btn" type="button" id="newDocCloseBtn" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <label class="sheet-label" for="newDocNameInput">Nombre del documento o producto</label>
+      <input type="text" class="sheet-text-input" id="newDocNameInput" placeholder="Ej. Garantía MacBook, Seguro de auto, Visa..." autocomplete="off">
+
+      <label class="sheet-label">Tipo o categoría</label>
+      <div class="category-grid" id="categoryGrid">
+        <!-- Opciones de categoría renderizadas dinámicamente -->
+      </div>
+
+      <label class="sheet-label" for="newDocDateInput">Fecha de vencimiento (opcional)</label>
+      <div class="sheet-chips" id="newChips">
+        <button type="button" class="chip-btn" data-new-years="1">+1 año</button>
+        <button type="button" class="chip-btn" data-new-years="2">+2 años</button>
+        <button type="button" class="chip-btn" data-new-years="3">+3 años</button>
+        <button type="button" class="chip-btn" data-new-years="5">+5 años</button>
+      </div>
+
+      <input type="date" id="newDocDateInput">
+      <p class="sheet-error" id="newDocError">Ingresa un nombre para el documento.</p>
+
+      <div class="sheet-actions">
+        <button class="btn-save" type="button" id="newDocSaveBtn">Crear documento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diálogo de confirmación para eliminar -->
+  <div class="confirm-modal-backdrop" id="confirmModal">
+    <div class="confirm-modal-box">
+      <h3 id="confirmModalTitle">¿Eliminar documento?</h3>
+      <p id="confirmModalDesc">Se borrará permanentemente este documento y su fecha registrada.</p>
+      <div class="confirm-modal-actions">
+        <button type="button" class="btn-modal-cancel" id="confirmModalCancelBtn">Cancelar</button>
+        <button type="button" class="btn-modal-danger" id="confirmModalOkBtn">Eliminar</button>
       </div>
     </div>
   </div>
 
   <script>
-    const DOCS = [
-      { id: "cedula", name: "Cédula" },
-      { id: "licencia", name: "Licencia de conducir" },
-      { id: "visa", name: "Visa" },
-      { id: "pasaporte", name: "Pasaporte" }
+    // Categorías con iconos nativos SVG
+    const CATEGORIES = {
+      garantia: {
+        name: "Garantía",
+        iconClass: "garantia",
+        svg: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+      },
+      cedula: {
+        name: "Identidad",
+        iconClass: "cedula",
+        svg: `<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M15 8h2M15 12h2M7 16h10"/></svg>`
+      },
+      licencia: {
+        name: "Vehículo",
+        iconClass: "licencia",
+        svg: `<svg viewBox="0 0 24 24"><path d="M14 16H9m10 0v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3M7 16v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3"/><path d="M4 11l2-6h12l2 6v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5z"/><circle cx="7.5" cy="13.5" r="1.5"/><circle cx="16.5" cy="13.5" r="1.5"/></svg>`
+      },
+      visa: {
+        name: "Viaje / Visa",
+        iconClass: "visa",
+        svg: `<svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.7-.1-1.3.3-1.5 1-.2.8.2 1.5.9 1.8l6.3 3.5-3 3-2.5-.5c-.4-.1-.8.1-1 .4l-.7.7 3.5 2.1 2.1 3.5.7-.7c.3-.2.5-.6.4-1l-.5-2.5 3-3 3.5 6.3c.3.7 1 .9 1.8.9.7-.2 1.1-.8 1-1.5z"/></svg>`
+      },
+      pasaporte: {
+        name: "Pasaporte",
+        iconClass: "pasaporte",
+        svg: `<svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="3"/><circle cx="12" cy="10" r="3.5"/><path d="M12 6.5v7M8.5 10h7M8 17h8"/></svg>`
+      },
+      tarjeta: {
+        name: "Tarjeta / Pago",
+        iconClass: "tarjeta",
+        svg: `<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/></svg>`
+      },
+      hogar: {
+        name: "Hogar / Renta",
+        iconClass: "hogar",
+        svg: `<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+      },
+      documento: {
+        name: "General / Doc",
+        iconClass: "documento",
+        svg: `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
+      }
+    };
+
+    // Documentos iniciales sugeridos por defecto
+    const DEFAULT_DOCS = [
+      { id: "cedula", name: "Cédula", category: "cedula" },
+      { id: "licencia", name: "Licencia de conducir", category: "licencia" },
+      { id: "visa", name: "Visa", category: "visa" },
+      { id: "pasaporte", name: "Pasaporte", category: "pasaporte" }
     ];
 
-    const cardsEl = document.getElementById("cards");
+    // Estado principal
+    let userDocs = [];
+    let datesData = {};
+    let saveTimer = null;
+    let currentDocEditing = null;
+    let selectedCategoryNew = "garantia";
+
+    // Elementos DOM
+    const docsListEl = document.getElementById("docsList");
+    const summaryTextEl = document.getElementById("summaryText");
     const saveMsgEl = document.getElementById("saveMsg");
-    const bannerEl = document.getElementById("banner");
     const themeToggleBtn = document.getElementById("themeToggle");
     const metaThemeColor = document.getElementById("metaThemeColor");
+    const addDocHeaderBtn = document.getElementById("addDocHeaderBtn");
+    const addDocListBtn = document.getElementById("addDocListBtn");
 
-    // Modal elements
-    const clearModal = document.getElementById("clearModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-    const modalCancelBtn = document.getElementById("modalCancelBtn");
-    const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+    // Sheet de edición
+    const editSheetBackdrop = document.getElementById("editSheetBackdrop");
+    const editCloseBtn = document.getElementById("editCloseBtn");
+    const editDocTitle = document.getElementById("editDocTitle");
+    const editIconBadge = document.getElementById("editIconBadge");
+    const editNameInput = document.getElementById("editNameInput");
+    const editDateInput = document.getElementById("editDateInput");
+    const editError = document.getElementById("editError");
+    const editSaveBtn = document.getElementById("editSaveBtn");
+    const editClearBtn = document.getElementById("editClearBtn");
+    const editDeleteBtn = document.getElementById("editDeleteBtn");
 
-    let currentPendingDoc = null;
-    let currentData = {};
-    let saveTimer = null;
+    // Sheet de nuevo documento
+    const newDocSheetBackdrop = document.getElementById("newDocSheetBackdrop");
+    const newDocCloseBtn = document.getElementById("newDocCloseBtn");
+    const newDocNameInput = document.getElementById("newDocNameInput");
+    const categoryGrid = document.getElementById("categoryGrid");
+    const newDocDateInput = document.getElementById("newDocDateInput");
+    const newDocError = document.getElementById("newDocError");
+    const newDocSaveBtn = document.getElementById("newDocSaveBtn");
 
-    // --- Gestión de Tema (Modo Claro y Oscuro) ---
+    // Modal de confirmación
+    const confirmModal = document.getElementById("confirmModal");
+    const confirmModalTitle = document.getElementById("confirmModalTitle");
+    const confirmModalDesc = document.getElementById("confirmModalDesc");
+    const confirmModalCancelBtn = document.getElementById("confirmModalCancelBtn");
+    const confirmModalOkBtn = document.getElementById("confirmModalOkBtn");
+    let pendingConfirmAction = null;
+
+    // --- Tema (Claro / Oscuro) ---
     const SUN_SVG = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
     const MOON_SVG = `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
 
@@ -657,12 +1063,12 @@
         themeToggleBtn.innerHTML = SUN_SVG;
         themeToggleBtn.setAttribute("aria-label", "Cambiar a modo claro");
         themeToggleBtn.setAttribute("title", "Cambiar a modo claro");
-        metaThemeColor.setAttribute("content", "#131512");
+        metaThemeColor.setAttribute("content", "#000000");
       } else {
         themeToggleBtn.innerHTML = MOON_SVG;
         themeToggleBtn.setAttribute("aria-label", "Cambiar a modo oscuro");
         themeToggleBtn.setAttribute("title", "Cambiar a modo oscuro");
-        metaThemeColor.setAttribute("content", "#F5F3EE");
+        metaThemeColor.setAttribute("content", "#F2F2F7");
       }
     }
 
@@ -706,10 +1112,10 @@
     }
 
     function daysText(days) {
-      if (days === null) return "Agrega la fecha de vencimiento.";
-      if (days < 0) return `Vencido hace ${Math.abs(days)} día${Math.abs(days) === 1 ? "" : "s"}.`;
-      if (days === 0) return "Vence hoy.";
-      return `Faltan <strong>${days}</strong> día${days === 1 ? "" : "s"}.`;
+      if (days === null) return "Sin registrar";
+      if (days < 0) return `Vencido hace ${Math.abs(days)} día${Math.abs(days) === 1 ? "" : "s"}`;
+      if (days === 0) return "Vence hoy";
+      return `Faltan <strong>${days}</strong> día${days === 1 ? "" : "s"}`;
     }
 
     function getFutureDateString(years) {
@@ -721,187 +1127,314 @@
       return `${yyyy}-${mm}-${dd}`;
     }
 
-    // --- Modal de Confirmación de Limpieza ---
-    function promptClearDoc(doc) {
-      currentPendingDoc = doc;
-      modalTitle.textContent = `¿Limpiar ${doc.name}?`;
-      modalDesc.innerHTML = `Se borrará la fecha configurada para <strong>${doc.name}</strong>. Podrás volver a ingresarla cuando quieras.`;
-      clearModal.classList.add("active");
+    // --- Resumen superior ---
+    function updateSummaryBar() {
+      let registered = 0;
+      let expired = 0;
+      let urgent = 0;
+
+      userDocs.forEach(doc => {
+        const val = datesData[doc.id];
+        if (val) {
+          registered++;
+          const d = daysUntil(val);
+          if (d < 0) expired++;
+          else if (d <= 60) urgent++;
+        }
+      });
+
+      if (userDocs.length === 0) {
+        summaryTextEl.textContent = "No tienes documentos registrados. ¡Agrega uno con el botón +!";
+      } else if (registered === 0) {
+        summaryTextEl.textContent = `${userDocs.length} documento${userDocs.length === 1 ? "" : "s"} sin fecha configurada`;
+      } else if (expired > 0) {
+        summaryTextEl.textContent = `${expired} documento${expired === 1 ? "" : "s"} vencido${expired === 1 ? "" : "s"}`;
+      } else if (urgent > 0) {
+        summaryTextEl.textContent = `${urgent} documento${urgent === 1 ? "" : "s"} por vencer pronto`;
+      } else {
+        summaryTextEl.textContent = `${registered} de ${userDocs.length} documentos al día`;
+      }
     }
 
-    function closeModal() {
-      clearModal.classList.remove("active");
-      currentPendingDoc = null;
+    // --- Modal de Confirmación ---
+    function showConfirm(title, desc, onOk) {
+      confirmModalTitle.textContent = title;
+      confirmModalDesc.textContent = desc;
+      pendingConfirmAction = onOk;
+      confirmModal.classList.add("active");
     }
 
-    modalCancelBtn.addEventListener("click", closeModal);
-    clearModal.addEventListener("click", (e) => {
-      if (e.target === clearModal) closeModal();
+    function closeConfirm() {
+      confirmModal.classList.remove("active");
+      pendingConfirmAction = null;
+    }
+
+    confirmModalCancelBtn.addEventListener("click", closeConfirm);
+    confirmModal.addEventListener("click", (e) => {
+      if (e.target === confirmModal) closeConfirm();
+    });
+    confirmModalOkBtn.addEventListener("click", () => {
+      if (pendingConfirmAction) pendingConfirmAction();
+      closeConfirm();
     });
 
-    modalConfirmBtn.addEventListener("click", async () => {
-      if (!currentPendingDoc) return;
-      const docId = currentPendingDoc.id;
-      const docName = currentPendingDoc.name;
-      delete currentData[docId];
-      await save(currentData, `Fecha de ${docName} limpiada`);
-      closeModal();
-      render(currentData);
+    // --- Sheet de Edición ---
+    function openEditSheet(doc) {
+      currentDocEditing = doc;
+      const cat = CATEGORIES[doc.category] || CATEGORIES.documento;
+
+      editDocTitle.textContent = doc.name;
+      editNameInput.value = doc.name;
+      editIconBadge.className = `doc-icon-badge ${cat.iconClass}`;
+      editIconBadge.innerHTML = cat.svg;
+
+      const val = datesData[doc.id] || "";
+      editDateInput.value = val;
+      editError.style.display = "none";
+
+      if (val) {
+        editClearBtn.style.display = "flex";
+      } else {
+        editClearBtn.style.display = "none";
+      }
+
+      editSheetBackdrop.classList.add("active");
+    }
+
+    function closeEditSheet() {
+      editSheetBackdrop.classList.remove("active");
+      currentDocEditing = null;
+    }
+
+    editCloseBtn.addEventListener("click", closeEditSheet);
+    editSheetBackdrop.addEventListener("click", (e) => {
+      if (e.target === editSheetBackdrop) closeEditSheet();
     });
 
-    // --- Renderizado de tarjetas ---
-    function render(data) {
-      currentData = data;
-      cardsEl.innerHTML = "";
+    // Píldoras en edición
+    document.querySelectorAll("[data-edit-years]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const years = parseInt(btn.getAttribute("data-edit-years"), 10);
+        editDateInput.value = getFutureDateString(years);
+        editError.style.display = "none";
+      });
+    });
 
-      DOCS.forEach(doc => {
-        const value = data[doc.id] || "";
-        const days = daysUntil(value);
-        const status = statusFor(days);
+    // Guardar cambios en edición
+    editSaveBtn.addEventListener("click", async () => {
+      if (!currentDocEditing) return;
+      const newName = editNameInput.value.trim();
+      if (!newName) {
+        editError.textContent = "El documento debe tener un nombre.";
+        editError.style.display = "block";
+        return;
+      }
 
-        const card = document.createElement("div");
-        card.className = "card";
+      // Actualizar nombre
+      currentDocEditing.name = newName;
+      await saveDocsList(userDocs);
 
-        if (value) {
-          card.innerHTML = `
-            <div class="card-top">
-              <p class="doc-name">${doc.name}</p>
-              <span class="pill ${status.cls}">${status.label}</span>
-            </div>
-            <div class="date-row">
-              <div class="date-info">
-                <div class="date-display">Vence: ${formatDate(value)}</div>
-                <div class="days">${daysText(days)}</div>
-              </div>
-              <div class="card-actions">
-                <button class="clear-btn" type="button" data-clear="${doc.id}" title="Limpiar fecha">
-                  <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
-                  Limpiar
-                </button>
-                <button class="renew-btn" type="button" data-id="${doc.id}">Renové</button>
-              </div>
-            </div>
-            <div class="renew-form" id="form-${doc.id}">
-              <label for="input-${doc.id}">Nueva fecha de vencimiento</label>
-              <div class="preset-chips">
-                <span class="preset-chip-label">Sugerir:</span>
-                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="1">+1 año</button>
-                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="3">+3 años</button>
-                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="5">+5 años</button>
-                <button type="button" class="chip-btn" data-preset-renew="${doc.id}" data-years="10">+10 años</button>
-              </div>
-              <input type="date" id="input-${doc.id}" value="${value}">
-              <p class="error" id="error-${doc.id}">Elegí una fecha antes de guardar.</p>
-              <div class="renew-actions">
-                <button class="btn primary" type="button" data-save="${doc.id}">Guardar</button>
-                <button class="btn" type="button" data-cancel="${doc.id}">Cancelar</button>
-                <button class="btn danger-outline" type="button" data-form-clear="${doc.id}">Limpiar fecha</button>
-              </div>
-            </div>
-          `;
-        } else {
-          card.innerHTML = `
-            <div class="card-top">
-              <p class="doc-name">${doc.name}</p>
-              <span class="pill ${status.cls}">${status.label}</span>
-            </div>
-            <label for="input-${doc.id}">Fecha de vencimiento</label>
-            <div class="preset-chips">
-              <span class="preset-chip-label">Sugerir:</span>
-              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="1">+1 año</button>
-              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="3">+3 años</button>
-              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="5">+5 años</button>
-              <button type="button" class="chip-btn" data-preset="${doc.id}" data-years="10">+10 años</button>
-            </div>
-            <div class="date-input-group">
-              <input type="date" id="input-${doc.id}">
-              <button class="btn primary save-new-btn" type="button" data-save-new="${doc.id}">Guardar</button>
-            </div>
-            <p class="error" id="error-${doc.id}">Elegí una fecha antes de guardar.</p>
-          `;
+      // Actualizar fecha
+      if (editDateInput.value) {
+        datesData[currentDocEditing.id] = editDateInput.value;
+      }
+      await saveDates(datesData, `${newName} actualizado`);
+
+      closeEditSheet();
+      render();
+    });
+
+    // Limpiar fecha
+    editClearBtn.addEventListener("click", async () => {
+      if (!currentDocEditing) return;
+      delete datesData[currentDocEditing.id];
+      await saveDates(datesData, `Fecha de ${currentDocEditing.name} eliminada`);
+      closeEditSheet();
+      render();
+    });
+
+    // Eliminar documento
+    editDeleteBtn.addEventListener("click", () => {
+      if (!currentDocEditing) return;
+      const doc = currentDocEditing;
+      showConfirm(
+        `¿Eliminar ${doc.name}?`,
+        `Se borrará este documento y toda su información registrada.`,
+        async () => {
+          userDocs = userDocs.filter(d => d.id !== doc.id);
+          delete datesData[doc.id];
+          await saveDocsList(userDocs);
+          await saveDates(datesData, `${doc.name} eliminado`);
+          closeEditSheet();
+          render();
         }
+      );
+    });
 
-        cardsEl.appendChild(card);
-
-        if (value) {
-          const renewBtn = card.querySelector(".renew-btn");
-          const form = card.querySelector(`#form-${doc.id}`);
-          const clearBtn = card.querySelector(`[data-clear="${doc.id}"]`);
-          const formClearBtn = card.querySelector(`[data-form-clear="${doc.id}"]`);
-          const renewInput = card.querySelector(`#input-${doc.id}`);
-          const renewError = card.querySelector(`#error-${doc.id}`);
-
-          renewBtn.addEventListener("click", () => {
-            form.classList.toggle("open");
-          });
-
-          clearBtn.addEventListener("click", () => {
-            promptClearDoc(doc);
-          });
-
-          formClearBtn.addEventListener("click", () => {
-            form.classList.remove("open");
-            promptClearDoc(doc);
-          });
-
-          card.querySelectorAll(`[data-preset-renew="${doc.id}"]`).forEach(btn => {
-            btn.addEventListener("click", () => {
-              const years = parseInt(btn.getAttribute("data-years"), 10);
-              renewInput.value = getFutureDateString(years);
-              renewError.style.display = "none";
-            });
-          });
-
-          card.querySelector(`[data-save="${doc.id}"]`).addEventListener("click", async () => {
-            if (!renewInput.value) {
-              renewError.style.display = "block";
-              return;
-            }
-            data[doc.id] = renewInput.value;
-            await save(data, "Fecha actualizada");
-            render(data);
-          });
-
-          card.querySelector(`[data-cancel="${doc.id}"]`).addEventListener("click", () => {
-            form.classList.remove("open");
-          });
-        } else {
-          const input = card.querySelector(`#input-${doc.id}`);
-          const errorEl = card.querySelector(`#error-${doc.id}`);
-          const saveBtn = card.querySelector(`[data-save-new="${doc.id}"]`);
-
-          // Presets rápidos para elegir año futuro sin tener que rodar la rueda
-          card.querySelectorAll(`[data-preset="${doc.id}"]`).forEach(btn => {
-            btn.addEventListener("click", () => {
-              const years = parseInt(btn.getAttribute("data-years"), 10);
-              input.value = getFutureDateString(years);
-              errorEl.style.display = "none";
-            });
-          });
-
-          // Solo se guarda al hacer clic explícito en "Guardar", NO al tocar o cambiar el input
-          saveBtn.addEventListener("click", async () => {
-            if (!input.value) {
-              errorEl.style.display = "block";
-              return;
-            }
-            data[doc.id] = input.value;
-            await save(data, "Fecha guardada");
-            render(data);
-          });
-
-          // Limpiar el mensaje de error si el usuario elige una fecha
-          input.addEventListener("input", () => {
-            if (input.value) {
-              errorEl.style.display = "none";
-            }
-          });
-        }
+    // --- Sheet de Nuevo Documento ---
+    function renderCategoryGrid() {
+      categoryGrid.innerHTML = "";
+      Object.keys(CATEGORIES).forEach(catKey => {
+        const cat = CATEGORIES[catKey];
+        const opt = document.createElement("div");
+        opt.className = `category-opt ${catKey === selectedCategoryNew ? "selected" : ""}`;
+        opt.setAttribute("role", "button");
+        opt.innerHTML = `
+          <div class="cat-icon doc-icon-badge ${cat.iconClass}">${cat.svg}</div>
+          <span class="cat-name">${cat.name}</span>
+        `;
+        opt.addEventListener("click", () => {
+          selectedCategoryNew = catKey;
+          renderCategoryGrid();
+        });
+        categoryGrid.appendChild(opt);
       });
     }
 
-    // --- Almacenamiento ---
-    async function load() {
+    function openNewDocSheet() {
+      newDocNameInput.value = "";
+      newDocDateInput.value = "";
+      newDocError.style.display = "none";
+      selectedCategoryNew = "garantia";
+      renderCategoryGrid();
+      newDocSheetBackdrop.classList.add("active");
+      setTimeout(() => newDocNameInput.focus(), 300);
+    }
+
+    function closeNewDocSheet() {
+      newDocSheetBackdrop.classList.remove("active");
+    }
+
+    addDocHeaderBtn.addEventListener("click", openNewDocSheet);
+    addDocListBtn.addEventListener("click", openNewDocSheet);
+    newDocCloseBtn.addEventListener("click", closeNewDocSheet);
+    newDocSheetBackdrop.addEventListener("click", (e) => {
+      if (e.target === newDocSheetBackdrop) closeNewDocSheet();
+    });
+
+    // Píldoras en nuevo documento
+    document.querySelectorAll("[data-new-years]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const years = parseInt(btn.getAttribute("data-new-years"), 10);
+        newDocDateInput.value = getFutureDateString(years);
+      });
+    });
+
+    // Crear documento
+    newDocSaveBtn.addEventListener("click", async () => {
+      const name = newDocNameInput.value.trim();
+      if (!name) {
+        newDocError.textContent = "Escribe un nombre para el documento o producto.";
+        newDocError.style.display = "block";
+        return;
+      }
+
+      const newId = "doc_" + Date.now();
+      const newDoc = {
+        id: newId,
+        name: name,
+        category: selectedCategoryNew
+      };
+
+      userDocs.push(newDoc);
+      await saveDocsList(userDocs);
+
+      if (newDocDateInput.value) {
+        datesData[newId] = newDocDateInput.value;
+        await saveDates(datesData, `"${name}" agregado`);
+      } else {
+        await saveDates(datesData, `"${name}" agregado`);
+      }
+
+      closeNewDocSheet();
+      render();
+    });
+
+    // --- Renderizado principal ---
+    function render() {
+      docsListEl.innerHTML = "";
+      updateSummaryBar();
+
+      if (userDocs.length === 0) {
+        docsListEl.innerHTML = `
+          <div style="padding: 24px 16px; text-align: center; color: var(--ink-soft); font-size: 14px;">
+            Aún no tienes documentos o garantías. Presiona el botón de abajo o el botón <strong>+</strong> para crear el primero.
+          </div>
+        `;
+        return;
+      }
+
+      userDocs.forEach(doc => {
+        const value = datesData[doc.id] || "";
+        const days = daysUntil(value);
+        const status = statusFor(days);
+        const cat = CATEGORIES[doc.category] || CATEGORIES.documento;
+
+        const row = document.createElement("div");
+        row.className = "doc-row";
+        row.setAttribute("role", "button");
+        row.setAttribute("tabindex", "0");
+
+        let subtitleHTML = "";
+        let metaHTML = "";
+
+        if (value) {
+          subtitleHTML = `<p class="doc-subtitle has-date">Vence: ${formatDate(value)} · ${daysText(days)}</p>`;
+          metaHTML = `
+            <span class="pill ${status.cls}">${status.label}</span>
+            <span class="chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          `;
+        } else {
+          subtitleHTML = `<p class="doc-subtitle">Sin fecha de vencimiento</p>`;
+          metaHTML = `
+            <span class="add-badge">+ Agregar</span>
+            <span class="chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          `;
+        }
+
+        row.innerHTML = `
+          <div class="doc-icon-badge ${cat.iconClass}">
+            ${cat.svg}
+          </div>
+          <div class="doc-info">
+            <h3 class="doc-title">${doc.name}</h3>
+            ${subtitleHTML}
+          </div>
+          <div class="doc-meta">
+            ${metaHTML}
+          </div>
+        `;
+
+        row.addEventListener("click", () => {
+          openEditSheet(doc);
+        });
+
+        docsListEl.appendChild(row);
+      });
+    }
+
+    // --- Almacenamiento Local ---
+    async function loadDocsList() {
+      try {
+        const stored = localStorage.getItem("mis_documentos_lista");
+        if (stored) {
+          return JSON.parse(stored);
+        }
+        // Guardar por defecto si es la primera vez
+        localStorage.setItem("mis_documentos_lista", JSON.stringify(DEFAULT_DOCS));
+        return DEFAULT_DOCS;
+      } catch (e) {
+        return DEFAULT_DOCS;
+      }
+    }
+
+    async function saveDocsList(list) {
+      try {
+        localStorage.setItem("mis_documentos_lista", JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    async function loadDates() {
       try {
         const result = localStorage.getItem("documentos");
         return result ? JSON.parse(result) : {};
@@ -910,7 +1443,7 @@
       }
     }
 
-    async function save(data, customMsg = "Guardado") {
+    async function saveDates(data, customMsg = "Guardado") {
       try {
         localStorage.setItem("documentos", JSON.stringify(data));
         saveMsgEl.textContent = customMsg;
@@ -926,8 +1459,9 @@
     // --- Inicialización ---
     (async function init() {
       applyTheme(getPreferredTheme());
-      const data = await load();
-      render(data);
+      userDocs = await loadDocsList();
+      datesData = await loadDates();
+      render();
     })();
   </script>
 </body>
