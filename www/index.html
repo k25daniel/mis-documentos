@@ -8,6 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Documentos">
   <meta name="theme-color" id="metaThemeColor" content="#F2F2F7">
+  <link rel="manifest" href="manifest.json">
   <title>Mis documentos</title>
   <style>
     :root {
@@ -1463,6 +1464,17 @@
       datesData = await loadDates();
       render();
     })();
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('Service Worker registrado');
+        }).catch(err => {
+          console.warn('Error al registrar Service Worker', err);
+        });
+      });
+    }
   </script>
 </body>
 
